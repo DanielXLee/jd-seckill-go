@@ -11,7 +11,9 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 ./.idea
-./qr_code.png
+qr_code.png
+bin
+.vscode
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
