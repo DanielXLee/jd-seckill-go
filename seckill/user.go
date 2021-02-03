@@ -11,8 +11,8 @@ import (
 	"github.com/tidwall/gjson"
 	"k8s.io/klog"
 
-	common "github.com/DanielXLee/jd_seckill_go/common"
-	conf "github.com/DanielXLee/jd_seckill_go/config"
+	common "github.com/DanielXLee/jd-seckill-go/common"
+	conf "github.com/DanielXLee/jd-seckill-go/config"
 )
 
 type User struct {
@@ -41,8 +41,8 @@ func (this *User) QrLogin() (string, error) {
 	req.SetHeader("Referer", "https://passport.jd.com/new/login.aspx")
 	resp, err := req.SetUrl("https://qr.m.jd.com/show?appid=133&size=300&t="+strconv.Itoa(int(time.Now().Unix()*1000))).SetMethod("get").Send().EndFile("./", "qr_code.png")
 	if err != nil || resp.StatusCode != http.StatusOK {
-		klog.Info("获取二维码失败")
-		return "", fmt.Errorf("获取二维码失败")
+		klog.Errorf("获取二维码失败: %v", err)
+		return "", err
 	}
 	cookies := resp.Cookies()
 	wlfstkSmdl := ""

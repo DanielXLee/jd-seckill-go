@@ -3,7 +3,7 @@ package service
 import (
 	"strconv"
 
-	conf "github.com/DanielXLee/jd_seckill_go/config"
+	conf "github.com/DanielXLee/jd-seckill-go/config"
 	"gopkg.in/gomail.v2"
 )
 

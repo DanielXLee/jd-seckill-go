@@ -12,9 +12,9 @@ import (
 	"github.com/tidwall/gjson"
 	"k8s.io/klog"
 
-	common "github.com/DanielXLee/jd_seckill_go/common"
-	conf "github.com/DanielXLee/jd_seckill_go/config"
-	service "github.com/DanielXLee/jd_seckill_go/service"
+	common "github.com/DanielXLee/jd-seckill-go/common"
+	conf "github.com/DanielXLee/jd-seckill-go/config"
+	service "github.com/DanielXLee/jd-seckill-go/service"
 )
 
 type Seckill struct {
@@ -56,7 +56,10 @@ func (this *Seckill) MakeReserve() {
 	} else {
 		reserveUrl := gjson.Get(body, "url").String()
 		req = httpc.NewRequest(this.client)
-		_, _, _ = req.SetUrl("https:" + reserveUrl).SetMethod("get").Send().End()
+		_, _, err = req.SetUrl("https:" + reserveUrl).SetMethod("get").Send().End()
+		if err != nil {
+			klog.Errorf("预约失败，错误：%v", err)
+		}
 		klog.Info("预约成功，已获得抢购资格 / 您已成功预约过了，无需重复预约")
 	}
 }

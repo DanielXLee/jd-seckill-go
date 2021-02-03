@@ -9,9 +9,9 @@ import (
 	"time"
 
 	"github.com/Albert-Zhan/httpc"
-	common "github.com/DanielXLee/jd_seckill_go/common"
-	conf "github.com/DanielXLee/jd_seckill_go/config"
-	jd_seckill "github.com/DanielXLee/jd_seckill_go/seckill"
+	common "github.com/DanielXLee/jd-seckill-go/common"
+	conf "github.com/DanielXLee/jd-seckill-go/config"
+	jd_seckill "github.com/DanielXLee/jd-seckill-go/seckill"
 	"github.com/tidwall/gjson"
 	"k8s.io/klog"
 )

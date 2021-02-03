@@ -1,4 +1,4 @@
-module github.com/DanielXLee/jd_seckill_go
+module github.com/DanielXLee/jd-seckill-go
 
 go 1.15
 

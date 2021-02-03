@@ -1,5 +1,7 @@
 .DEFAULT_GOAL:=help
 GOLANGCI_LINT_VER = "1.30.0"
+# Image URL to use all building/pushing image targets
+IMG ?= danielxlee/jdseckill:latest
 
 ##@ Code management
 
@@ -36,6 +38,32 @@ build: ## Build seckill binary
 
 run: check ## Run main programe
 	go run ./main.go
+
+docker-build: ## Build the docker image
+	docker build . -t ${IMG}
+
+docker-push: ## Push the docker image
+	docker push ${IMG}
+
+docker-run: ## Run docker container
+	@docker run -d --rm \
+	--name jd-seckill ${IMG}
+
+show-qrcode: ## Show qrcode image from docker container
+	@docker cp jd-seckill:/qr_code.png .
+	@open qr_code.png
+
+show-logs: ## show container logs
+	@docker logs jd-seckill -f
+
+start: ## start seckill
+	- make docker-run
+	- sleep 5
+	- make show-qrcode
+	- make show-logs
+
+stop: ## stop docker container
+	@docker stop jd-seckill
 
 ##@ Help
 help: ## Display this help
